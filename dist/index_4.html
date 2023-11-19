@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/index.0e07aaf3.css">
+    <link rel="stylesheet" href="/index_4.8ee3c7ec.css">
+    <link rel="shortcut icon" href="/log_icon.1951b72c.png">
+    <title>Kim Logistics - World Time</title>
+</head>
+<body>
+    <!-- Header start -->
+    <header class="header">
+        <div class="wrapper">
+
+            <div class="header__wrapper">
+                <div class="header-logo">Kim Logistics</div>
+
+                <nav class="header__nav">
+                    <ul class="header__list">
+                        <li class="header__item">
+                            <a href="/index.html" class="header__link">Home</a>
+                        </li>
+                        <li class="header__item">
+                            <a href="/index_2.html" class="header__link">About</a>
+                        </li>
+                        <li class="header__item">
+                            <a href="#!" class="header__link">Pages</a>
+                        </li>
+                        <li class="header__item">
+                            <a href="/index_4.html" class="header__link">World Time</a>
+                        </li>
+                        <li class="header__item">
+                            <a href="/index_3.html" class="header__link">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+
+    <h1>
+        Here you can conveniently check the time in any city in the world!
+    </h1>
+
+    <label for="cityInput">Input city name:</label>
+    <input type="text" id="cityInput" placeholder="Write city name here">
+
+    <button onclick="getTimeInCity()">Get time</button>
+
+    <p id="result"></p>
+
+    <h3>Search history:</h3>
+    <ul id="searchHistory"></ul>
+
+    <script src="/index_4.bbf5c6f3.js"></script>
+
+    <button onclick="clearSearchHistory()">Clear seach history</button>
+
+    <script>function clearSearchHistory() {
+    localStorage.removeItem("searchHistory");
+    displaySearchHistory();
+}
+
+</script>
+</main>
+<script src="/index_4.11b14ac0.js"></script></body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/index.0e07aaf3.css">
+    <link rel="stylesheet" href="/index_5.8ee3c7ec.css">
+    <link rel="shortcut icon" href="/log_icon.1951b72c.png">
+    <title>Kim Logistics - World Time</title>
+</head>
+<body>
+    <!-- Header start -->
+    <header class="header">
+        <div class="wrapper">
+
+            <div class="header__wrapper">
+                <div class="header-logo">Kim Logistics</div>
+
+                <nav class="header__nav">
+                    <ul class="header__list">
+                        <li class="header__item">
+                            <a href="/index.html" class="header__link">Home</a>
+                        </li>
+                        <li class="header__item">
+                            <a href="/index_2.html" class="header__link">About</a>
+                        </li>
+                        <li class="header__item">
+                            <a href="#!" class="header__link">Pages</a>
+                        </li>
+                        <li class="header__item">
+                            <a href="#!" class="header__link">Project</a>
+                        </li>
+                        <li class="header__item">
+                            <a href="/index_3.html" class="header__link">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+
+    <label for="cityInput">Input city name:</label>
+    <input type="text" id="cityInput" placeholder="Write city name here">
+
+    <button onclick="getTimeInCity()">Get time</button>
+
+    <p id="result"></p>
+
+    <h3>Search history:</h3>
+    <ul id="searchHistory"></ul>
+
+    <script>const apiKey = "768e0288406389e6e0f9840659813b24";
+function getTimeInCity() {
+    const cityInput = document.getElementById("cityInput");
+    const resultParagraph = document.getElementById("result");
+    const searchHistoryList = document.getElementById("searchHistory");
+    const city = cityInput.value;
+    // Получаем координаты города
+    const coordinatesUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+    fetch(coordinatesUrl).then((response)=>response.json()).then((data)=>{
+        const coordinates = data.coord;
+        const timeUrl = `http://worldtimeapi.org/api/timezone/Etc/GMT?lat=${coordinates.lat}&lon=${coordinates.lon}`;
+        // Получаем время по координатам
+        fetch(timeUrl).then((response)=>response.json()).then((timeData)=>{
+            const time = new Date(timeData.utc_datetime);
+            resultParagraph.textContent = `Current time in city ${city}: ${time}`;
+            // Сохраняем город в локальное хранилище
+            let searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+            searchHistory.push(city);
+            localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+            // Выводим историю поиска городов
+            displaySearchHistory();
+        }).catch((error)=>{
+            resultParagraph.textContent = `Couldn't get coordinates for the city ${city}: ${error}`;
+        });
+    }).catch((error)=>{
+        resultParagraph.textContent = `Couldn't get coordinates for the city ${city}: ${error}`;
+    });
+}
+function displaySearchHistory() {
+    const searchHistoryList = document.getElementById("searchHistory");
+    searchHistoryList.innerHTML = "";
+    let searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+    searchHistory.forEach((city)=>{
+        const listItem = document.createElement("li");
+        listItem.textContent = city;
+        searchHistoryList.appendChild(listItem);
+    });
+}
+// Инициализация: выводим историю поиска при загрузке страницы
+displaySearchHistory();
+
+</script>
+
+    <button onclick="clearSearchHistory()">Clear seach history</button>
+
+    <script>function clearSearchHistory() {
+    localStorage.removeItem("searchHistory");
+    displaySearchHistory();
+}
+
+</script>
+</main>
+<script src="/index_5.858f623a.js"></script></body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "homework1",
+  "source": "homework1/src/index.html",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build"
+  },
+  "devDependencies": {
+    "parcel": "latest"
+  }
+}
